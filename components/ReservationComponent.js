@@ -28,21 +28,24 @@ class Reservation extends Component {
 
     handleReservation() {
         console.log(JSON.stringify(this.state));
-        
+        const message = `Number of Campers: ${this.state.campers} \n\nHike-In? ${
+            this.state.hikeIn
+          } \n\nDate: ${this.state.date.toLocaleDateString("en-US")}`;
         Alert.alert(
             "Begin Search?",
-            'Number of Campers: ' + this.state.campers  + "\n" +
-            'Hike-In'  + this.state.hikeIn + "\n" +
-            'Date: ' + this.state.date.toLocaleDateString("en-US"),
+            message,
             [
               {
                 text: "Cancel",  
-                onPress: () => this.resetForm(),              
+                onPress: () => {
+                    console.log("Reservation search canceled");
+                    this.resetForm();
+                },              
                 style: "cancel"                
               },
               {
                 text: "OK",                
-                onPress: () => this.resetForm(), 
+                onPress: () => {this.resetForm()} 
               },
             ],
             { cancelable: false }
